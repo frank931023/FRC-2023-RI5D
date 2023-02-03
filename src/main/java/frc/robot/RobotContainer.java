@@ -66,11 +66,6 @@ public class RobotContainer {
       m_drive.arcadeDrive(
         -driverJoystick.getRawAxis(OIConstants.leftStick_Y) * DriveConstants.chassisSpeedScaler, driverJoystick.getRawAxis(OIConstants.rightStick_X) * DriveConstants.chassisSpeedScaler);}
       , m_drive));
-
-    // Grab
-    m_grab.setDefaultCommand(new RunCommand(()->{ 
-      m_grab.reverse(); }
-      , m_grab));
     
     // Strech 
     m_luffy.setDefaultCommand(new RunCommand(() -> {
