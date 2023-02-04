@@ -69,14 +69,14 @@ public class RobotContainer {
       , m_drive));
     
     // Strech 
-    m_luffy.setDefaultCommand(new RunCommand(() -> {
-      m_luffy.run(operatorJoystick.getRawAxis(OIConstants.leftStick_Y) * LuffyConstants.strechSpeedScaler); }
-      , m_luffy));
+    // m_luffy.setDefaultCommand(new RunCommand(() -> {
+    //   m_luffy.run(operatorJoystick.getRawAxis(OIConstants.leftStick_Y) * LuffyConstants.strechSpeedScaler); }
+    //   , m_luffy));
 
     // Elevator
-    m_elevator.setDefaultCommand(new RunCommand(() -> {
-      m_elevator.run(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
-      , m_elevator));
+    // m_elevator.setDefaultCommand(new RunCommand(() -> {
+    //   m_elevator.run(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
+    //   , m_elevator));
     
     // Configure the button bindings
     configureButtonBindings();
@@ -85,8 +85,8 @@ public class RobotContainer {
   // Use this method to define your button->command mappings. 
   private void configureButtonBindings() {
     // new JoystickButton(driverJoystick, OIConstants.Btn_A).toggleOnTrue(m_setPoint);
-    new JoystickButton(operatorJoystick, OIConstants.Btn_A).onTrue(new GrabAndRelease(m_grab)); 
-    new JoystickButton(operatorJoystick, OIConstants.Btn_B).onTrue(new UpAndDown(m_ototakeHirotada)); 
+    // new JoystickButton(operatorJoystick, OIConstants.Btn_A).onTrue(new GrabAndRelease(m_grab)); 
+    // new JoystickButton(operatorJoystick, OIConstants.Btn_B).onTrue(new UpAndDown(m_ototakeHirotada)); 
   }
 
   // Use this to pass the autonomous command to the main {@link Robot} class.
@@ -144,3 +144,80 @@ public class RobotContainer {
       new PathFollowing(m_drive, "New Path"), m_setPoint);
   }
 }
+
+// Driver Station reported IP: 10.71.30.2
+
+// > Task :discoverroborio
+// Discovering Target roborio
+// admin @ null: Connected.
+//   Reason: InvalidImageException
+//   Invalid RoboRIO Image Version!
+// RoboRIO image and GradleRIO versions are incompatible:
+//         Current image version: 2022_v4.0
+//         GradleRIO-compatible image versions: 2023_v3.*
+// See https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.htmlfor information about upgrading the RoboRIO image.
+// See https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html and
+// https://docs.wpilib.org/en/stable/docs/software/vscode-overview/importing-gradle-project.html
+// for information about updating WPILib and GradleRIO.
+// admin @ roborio-7130-FRC.local: Connected.
+//   Reason: InvalidImageException
+//   Invalid RoboRIO Image Version!
+// RoboRIO image and GradleRIO versions are incompatible:
+//         Current image version: 2022_v4.0
+//         GradleRIO-compatible image versions: 2023_v3.*
+// See https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.htmlfor information about upgrading the RoboRIO image.
+// See https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html and
+// https://docs.wpilib.org/en/stable/docs/software/vscode-overview/importing-gradle-project.html
+// for information about updating WPILib and GradleRIO.
+// admin @ 10.71.30.2: Connected.
+//   Reason: InvalidImageException
+//   Invalid RoboRIO Image Version!
+// RoboRIO image and GradleRIO versions are incompatible:
+//         Current image version: 2022_v4.0
+//         GradleRIO-compatible image versions: 2023_v3.*
+// See https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.htmlfor information about upgrading the RoboRIO image.
+// See https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html and
+// https://docs.wpilib.org/en/stable/docs/software/vscode-overview/importing-gradle-project.html
+// for information about updating WPILib and GradleRIO.
+// 1 other action(s) resolved but not connected.
+// 3 other action(s) failed resolution.
+// Run with --info for more details
+
+
+// > Task :discoverroborio FAILED
+// Missing Target!
+// =============================================
+// Are you connected to the robot, and is it on?
+// =============================================
+// GradleRIO detected this build failed due to not being able to find "roborio"!
+// Scroll up in this error log for more information.
+
+// FAILURE: Build failed with an exception.
+
+// * What went wrong:
+// Execution failed for task ':discoverroborio'.
+// > A failure occurred while executing edu.wpi.first.deployutils.deploy.target.discovery.TargetDiscoveryWorker
+//    > Target roborio could not be found at any location! See above for more details.
+
+// * Try:
+// > Run with --stacktrace option to get the stack trace.
+// > Run with --info or --debug option to get more log output.
+// > Run with --scan to get full insights.
+
+// * Get more help at https://help.gradle.org
+
+// BUILD FAILED in 3s
+// 4 actionable tasks: 2 executed, 2 up-to-date
+
+//  *  The terminal process "cmd.exe /d /c gradlew deploy  -PteamNumber=7130 --offline  -Dorg.gradle.java.home="C:\Users\Public\wpilib\2023\jdk"" terminated with exit code: 1. 
+//  *  Terminal will be reused by tasks, press any key to close it. 
+
+
+
+
+
+
+
+
+
+
