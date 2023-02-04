@@ -84,8 +84,7 @@ public class ChassisSubsystem extends SubsystemBase {
 
   public void resetOdometry(Pose2d initialPose) {
     resetEncoders();
-    m_odometry.resetPosition(
-      m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance(), initialPose);
+    m_odometry.resetPosition(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance(), initialPose);
   }
 
   public void resetEncoders() {
