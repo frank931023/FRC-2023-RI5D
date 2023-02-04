@@ -16,10 +16,10 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
  */
 public final class Constants {
     public static final class DriveConstants {
-        public static final int motorFrontLeft = 2;
-        public static final int motorFrontRight = 4;
-        public static final int motorRearLeft = 5;
-        public static final int motorRearRight = 3;
+        public static final int motorFrontLeft = 7;
+        public static final int motorFrontRight = 1;
+        public static final int motorRearLeft = 12;
+        public static final int motorRearRight = 15;
 
         public static final double chassisSpeedScaler = 0.5;
 
@@ -87,8 +87,8 @@ public final class Constants {
     }
 
     public final class ElevatorConstants {
-        public static final int leftMotorID = 0;
-        public static final int rightMotorID = 0;
+        public static final int leftMotorID = 9;
+        public static final int rightMotorID = 8;
         public static final double elevatorSpeedScaler = 0.5;
     }
 
