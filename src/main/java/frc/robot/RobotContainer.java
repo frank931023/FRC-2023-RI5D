@@ -65,7 +65,7 @@ public class RobotContainer {
     // Drive
     m_drive.setDefaultCommand(new RunCommand(() -> {
       m_drive.arcadeDrive(
-        -driverJoystick.getRawAxis(OIConstants.leftStick_Y) * DriveConstants.chassisSpeedScaler, driverJoystick.getRawAxis(OIConstants.rightStick_X) * DriveConstants.chassisSpeedScaler);}
+        driverJoystick.getRawAxis(OIConstants.leftStick_Y) * DriveConstants.chassisSpeedScaler, driverJoystick.getRawAxis(OIConstants.rightStick_X) * DriveConstants.chassisSpeedScaler);}
       , m_drive));
     
     // Strech 

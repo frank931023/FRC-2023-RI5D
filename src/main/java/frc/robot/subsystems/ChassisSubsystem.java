@@ -43,6 +43,10 @@ public class ChassisSubsystem extends SubsystemBase {
       new DifferentialDriveOdometry(
         m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
 
+    // DifferentialDriveOdometry m_odometry = 
+    //   new DifferentialDriveOdometry(
+    //     m_gyro.getRotation2d(), m_motorFrontLeft.getEncoder().getPosition(), m_motorRearLeft.getEncoder().getPosition());
+
   /** Creates a new ExampleSubsystem. */
   public ChassisSubsystem() {
     m_motorFrontLeft.setInverted(true);
@@ -71,8 +75,12 @@ public class ChassisSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double speed, double rotation) {
-    m_drive.arcadeDrive(-speed*0.6, rotation*0.7);
+    m_drive.arcadeDrive(speed, rotation);
   }
+
+  // public void curvatureDrive(double speed, double rotation) {
+  //   m_drive.curvatureDrive(speed, rotation, true);
+  // }
 
   public void setMotor2zero() {
     m_drive.arcadeDrive(0, 0);
@@ -90,6 +98,9 @@ public class ChassisSubsystem extends SubsystemBase {
   public void resetEncoders() {
     m_leftEncoder.reset();
     m_rightEncoder.reset();
+
+    // m_motorFrontLeft.getEncoder().setPosition(0.0);
+    // m_motorRearLeft.getEncoder().setPosition(0.0);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
@@ -131,7 +142,7 @@ public class ChassisSubsystem extends SubsystemBase {
     return m_gyro.getRotation2d().getDegrees();
   }
 
-  //Returns the turn rate of the robot, in degrees per second.
+  // Returns the turn rate of the robot, in degrees per second.
   public double getTurnRate() {
     return -m_gyro.getRate();
   }
