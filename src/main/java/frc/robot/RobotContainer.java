@@ -89,7 +89,6 @@ public class RobotContainer {
   }
 
   // Use this to pass the autonomous command to the main {@link Robot} class.
-
   public Command getAutonomousCommand() {
     // // Create a voltage constraint to ensure we don't accelerate too fast
     // var autoVoltageConstraint =
