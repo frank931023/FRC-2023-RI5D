@@ -16,22 +16,20 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
  */
 public final class Constants {
     public static final class DriveConstants {
-        public static final int motorFrontLeft = 7;
+        // Motors
+        public static final int motorFrontLeft = 4;
         public static final int motorFrontRight = 1;
-        public static final int motorRearLeft = 12;
-        public static final int motorRearRight = 15;
+        public static final int motorRearLeft = 2;
+        public static final int motorRearRight = 3;
 
-        public static final double chassisSpeedScaler = 0.5;
-
-        public static final int[] kLeftEncoderPort = {0, 0};
-        public static final int[] kRightEncoderPort = {0, 0};
-        public static final boolean kLeftEncoderReversed = true;
-        public static final boolean kRightEncoderReversed = true;
-        public static final double kEncoderCPR = 0;
-        public static final double kWheelDiameterMeters = 0;
+        // Encoders
+        public static final int kLeftEncoderPort = 3;
+        public static final int kRightEncoderPort = 4;
+        public static final double kEncoderCPR = 4096;
+        public static final double kWheelDiameterMeters = 0.097;
         public static final double kWheelCircumference = kWheelDiameterMeters * Math.PI;
-        public static final double kGearRatio = 0;
-        public static final double kDistancePerPulse = kWheelCircumference/kEncoderCPR/kGearRatio;
+        public static final double kGearRatio = 0.12;
+        public static final double kDistancePerPulse = kGearRatio * kWheelCircumference / kEncoderCPR * 100;
         // distancePerPulse = gearRatio * wheelPerimeter / EncoderCPR
 
         // Trajectory Constraints
@@ -41,23 +39,23 @@ public final class Constants {
         public static final int kPDriveVel = 0;
 
         // Chassis Related
-        public static final double kTrackWidthmeters = 0;
+        public static final double kTrackWidthmeters = 0.595;
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthmeters);
-
+        public static final double chassisArcadeSpdScaler = 0.75;
+        public static final double chassisArcadeRotScaler = 0.75;
+        public static final double chassisTankScaler = 0.5;
+    }
+    
+    public final class PIDConstants {
         // Charge Station
-        public static final double kLockPIDLeftkP = 0.1;
-        public static final double kLockPIDLeftkI = 0.1;
-        public static final double kLockPIDLeftkD = 0.01;
-        public static final double kLockPIDLeftiLimit = 0.3;
-
-        public static final double kLockPIDRightkP = 0.1;
-        public static final double kLockPIDRightkI = 0.1;
-        public static final double kLockPIDRightkD = 0.01;
-        public static final double kLockPIDRightiLimit = 0.3;
+        public static final double kP_Lock = 0.3;
+        public static final double kI_Lock = 0.0;
+        public static final double kD_Lock = 0.000;
+        public static final double iLimit_Lock = 0.36;
     }
     
     public final class AutoConstants {
-        // feedforward shit
+        // Feed forward shit
         public static final int kRamseteB = 0;
         public static final int kRamseteZeta = 0;
         public static final int kMaxSpeedMetersPerSecond = 0;
