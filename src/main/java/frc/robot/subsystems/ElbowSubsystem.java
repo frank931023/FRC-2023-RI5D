@@ -8,15 +8,15 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.LuffyConstants;
+import frc.robot.Constants.ElbowConstants;
 
-public class LuffySubsystem extends SubsystemBase {
+public class ElbowSubsystem extends SubsystemBase {
 
-  CANSparkMax m_luffyMotor = new CANSparkMax(LuffyConstants.motorID, MotorType.kBrushless);
+  private final CANSparkMax m_elbowMotor = new CANSparkMax(ElbowConstants.motorID, MotorType.kBrushless);
   
   /** Creates a new LufySubsystem. */
-  public LuffySubsystem() {
-    m_luffyMotor.setInverted(false);
+  public ElbowSubsystem() {
+    m_elbowMotor.setInverted(false);
   }
 
   @Override
@@ -25,10 +25,10 @@ public class LuffySubsystem extends SubsystemBase {
   }
 
   public void run(double speed){
-    m_luffyMotor.set(speed);
+    m_elbowMotor.set(speed);
   }
   
   public void stop(){
-    m_luffyMotor.set(0);
+    m_elbowMotor.set(0);
   }
 }

@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -12,11 +15,13 @@ import frc.robot.Constants.GrabberConstants;
 
 public class GrabberSubsystem extends SubsystemBase {
   private final Compressor comp = new Compressor(GrabberConstants.compressorID ,PneumaticsModuleType.CTREPCM);
-  private final DoubleSolenoid DoublePCM1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, GrabberConstants.DoublePCM1ForwardChannel, GrabberConstants.DoublePCM1ReverseChannel);
-  private final DoubleSolenoid DoublePCM2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, GrabberConstants.DoublePCM2ForwardChannel, GrabberConstants.DoublePCM2ReverseChannel);
+  private final DoubleSolenoid DoublePCM = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, GrabberConstants.ForwardChannel, GrabberConstants.ReverseChannel);
+  private final CANSparkMax m_grabberMotor = new CANSparkMax(GrabberConstants.motorID, MotorType.kBrushless);
 
   /** Creates a new GrabberSubsystem. */
-  public GrabberSubsystem() {}
+  public GrabberSubsystem() {
+    m_grabberMotor.setInverted(false);
+  }
 
   @Override
   public void periodic() {
@@ -25,22 +30,30 @@ public class GrabberSubsystem extends SubsystemBase {
 
   public void enablecompressor(){
     comp.enableDigital();
-    DoublePCM1.isFwdSolenoidDisabled();
-    DoublePCM2.isFwdSolenoidDisabled();
+    DoublePCM.isFwdSolenoidDisabled();
   }
 
-  public void forward(){
-    DoublePCM1.set(DoubleSolenoid.Value.kForward);
-    DoublePCM2.set(DoubleSolenoid.Value.kForward);
+  public void handOpen(){
+    DoublePCM.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void reverse(){
-    DoublePCM1.set(DoubleSolenoid.Value.kReverse);
-    DoublePCM2.set(DoubleSolenoid.Value.kReverse);
+  public void handClose(){
+    DoublePCM.set(DoubleSolenoid.Value.kReverse);
   }
   
-  public void stop(){
-    DoublePCM1.set(DoubleSolenoid.Value.kOff);
-    DoublePCM2.set(DoubleSolenoid.Value.kOff);
+  public void handStop(){
+    DoublePCM.set(DoubleSolenoid.Value.kOff);
+  }
+
+  public void rollIn(){
+    m_grabberMotor.set(GrabberConstants.motorSpeed);
+  }
+
+  public void rollOut(){
+    m_grabberMotor.set(-GrabberConstants.motorSpeed);
+  }
+
+  public void rollStop(){
+    m_grabberMotor.set(0);
   }
 }

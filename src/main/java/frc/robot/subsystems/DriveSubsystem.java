@@ -24,20 +24,20 @@ import frc.robot.Constants.OIConstants;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  CANSparkMax m_motorFrontLeft = new CANSparkMax(DriveConstants.motorFrontLeft, MotorType.kBrushless);
-  CANSparkMax m_motorFrontRight = new CANSparkMax(DriveConstants.motorFrontRight, MotorType.kBrushless);
-  CANSparkMax m_motorRearLeft = new CANSparkMax(DriveConstants.motorRearLeft, MotorType.kBrushless);
-  CANSparkMax m_motorRearRight = new CANSparkMax(DriveConstants.motorRearRight, MotorType.kBrushless);
+  private final CANSparkMax m_motorFrontLeft = new CANSparkMax(DriveConstants.motorFrontLeft, MotorType.kBrushless);
+  private final CANSparkMax m_motorFrontRight = new CANSparkMax(DriveConstants.motorFrontRight, MotorType.kBrushless);
+  private final CANSparkMax m_motorRearLeft = new CANSparkMax(DriveConstants.motorRearLeft, MotorType.kBrushless);
+  private final CANSparkMax m_motorRearRight = new CANSparkMax(DriveConstants.motorRearRight, MotorType.kBrushless);
 
-  MotorControllerGroup rightGroup = new MotorControllerGroup(m_motorFrontRight, m_motorRearRight);
-  MotorControllerGroup leftGroup = new MotorControllerGroup(m_motorFrontLeft, m_motorRearLeft);
+  private final MotorControllerGroup rightGroup = new MotorControllerGroup(m_motorFrontRight, m_motorRearRight);
+  private final MotorControllerGroup leftGroup = new MotorControllerGroup(m_motorFrontLeft, m_motorRearLeft);
 
-  DifferentialDrive m_drive = new DifferentialDrive(leftGroup, rightGroup);
+  private final DifferentialDrive m_drive = new DifferentialDrive(leftGroup, rightGroup);
 
-  AHRS m_gyro = new AHRS(Port.kMXP);
+  private final AHRS m_gyro = new AHRS(Port.kMXP);
 
-  WPI_CANCoder m_leftEncoder = new WPI_CANCoder(DriveConstants.kLeftEncoderPort);
-  WPI_CANCoder m_rightEncoder = new WPI_CANCoder(DriveConstants.kRightEncoderPort);
+  private final WPI_CANCoder m_leftEncoder = new WPI_CANCoder(DriveConstants.kLeftEncoderPort);
+  private final WPI_CANCoder m_rightEncoder = new WPI_CANCoder(DriveConstants.kRightEncoderPort);
 
   DifferentialDriveOdometry m_odometry = 
     new DifferentialDriveOdometry(
@@ -49,19 +49,17 @@ public class DriveSubsystem extends SubsystemBase {
     m_motorRearLeft.setInverted(true);
     m_motorFrontRight.setInverted(false);
     m_motorRearRight.setInverted(false);
+    
     resetEncoders();
     m_gyro.reset();
-    m_odometry = 
-      new DifferentialDriveOdometry(
-        m_gyro.getRotation2d(), getLeftRelativeDistance(), getRightRelativeDistance());
+    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(), getLeftRelativeDistance(), getRightRelativeDistance());
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
       m_odometry = 
-      new DifferentialDriveOdometry(
-        m_gyro.getRotation2d(), getLeftRelativeDistance(), getRightRelativeDistance());   
+      new DifferentialDriveOdometry(m_gyro.getRotation2d(), getLeftRelativeDistance(), getRightRelativeDistance());   
       SmartDashboard.putNumber("LeftDis", getLeftRelativeDistance());
       SmartDashboard.putNumber("RightDis", getRightRelativeDistance());
       // SmartDashboard.putNumber("Heading", getHeading());

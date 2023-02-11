@@ -62,26 +62,22 @@ public final class Constants {
         public static final int kMaxAccelerationMetersPerSecondSquared = 0;
     }
 
-    public final class LuffyConstants {
+    public final class ArmConstants {
         public static final double strechSpeedScaler = 0.5;
         public static final int motorID = 0;
     }
     
 
-    public final class OtotakeHirotadaConstants {
-        public static final int compressorID = 0;
-        public static final int DoublePCM1ForwardChannel = 0;
-        public static final int DoublePCM1ReverseChannel = 1;
-        public static final int DoublePCM2ForwardChannel = 2;
-        public static final int DoublePCM2ReverseChannel = 3;
+    public final class ElbowConstants {
+        public static final int motorID = 0;
     }
 
     public final class GrabberConstants {
         public static final int compressorID = 0;
-        public static final int DoublePCM1ForwardChannel = 0;
-        public static final int DoublePCM1ReverseChannel = 1;
-        public static final int DoublePCM2ForwardChannel = 2;
-        public static final int DoublePCM2ReverseChannel = 3;
+        public static final int ForwardChannel = 0;
+        public static final int ReverseChannel = 1;
+        public static final int motorID = 0;
+        public static final double motorSpeed = 0.5;
     }
 
     public final class ElevatorConstants {
