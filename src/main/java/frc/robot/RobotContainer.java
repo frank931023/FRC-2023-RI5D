@@ -10,13 +10,17 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Chassis.PathFollowingRamsete;
 import frc.robot.commands.Chassis.LockPID;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -33,6 +37,8 @@ public class RobotContainer {
 
   // Subsystems
   private final DriveSubsystem m_drive = new DriveSubsystem();
+  private final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
+  private final ArmSubsystem m_arm = new ArmSubsystem();
 
   // Chassis Commands
   private final LockPID m_setPoint = new LockPID(m_drive);
@@ -46,15 +52,11 @@ public class RobotContainer {
         driverJoystick.getRawAxis(OIConstants.rightStick_X) * DriveConstants.chassisArcadeRotScaler);
     }, m_drive));
 
-    // Strech 
-    // m_luffy.setDefaultCommand(new RunCommand(() -> {
-    //   m_luffy.run(operatorJoystick.getRawAxis(OIConstants.leftStick_Y) * LuffyConstants.strechSpeedScaler); }
-    //   , m_luffy));
-
     // Elevator
-    // m_elevator.setDefaultCommand(new RunCommand(() -> {
-    //   m_elevator.run(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
-    //   , m_elevator));
+    m_elevator.setDefaultCommand(new RunCommand(() -> {
+      m_elevator.run(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
+      , m_elevator));
+
 
     // Configure the button bindings
     configureButtonBindings();
@@ -69,15 +71,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(driverJoystick, OIConstants.Btn_A)
-      .toggleOnTrue(m_setPoint);
+    new JoystickButton(driverJoystick, OIConstants.Btn_A).onTrue(m_setPoint);
+    new JoystickButton(driverJoystick, OIConstants.Btn_B).onTrue(new RunCommand( () -> {m_drive.resetEncoders();}, m_drive));
 
-    new JoystickButton(driverJoystick, OIConstants.Btn_B)
-      .whileTrue( new RunCommand( () -> { m_drive.resetEncoders();}, m_drive));
-
-    // new JoystickButton(driverJoystick, OIConstants.Btn_A).toggleOnTrue(m_setPoint);
-    // new JoystickButton(operatorJoystick, OIConstants.Btn_A).onTrue(new GrabAndRelease(m_grab)); 
-    // new JoystickButton(operatorJoystick, OIConstants.Btn_B).onTrue(new UpAndDown(m_ototakeHirotada)); 
   }
 
   /**

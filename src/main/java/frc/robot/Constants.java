@@ -33,10 +33,9 @@ public final class Constants {
         // distancePerPulse = gearRatio * wheelPerimeter / EncoderCPR
 
         // Trajectory Constraints
-        public static final int ksVolts = 0;
-        public static final int kvVoltSecondsPerMeter = 0;
-        public static final int kaVoltSecondsSquaredPerMeter = 0;
-        public static final int kPDriveVel = 0;
+        public static final double ksVolts = 2.4;
+        public static final double kvVoltSecondsPerMeter = 7.2;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.0;
 
         // Chassis Related
         public static final double kTrackWidthmeters = 0.595;
@@ -48,18 +47,20 @@ public final class Constants {
     
     public final class PIDConstants {
         // Charge Station
-        public static final double kP_Lock = 0.3;
-        public static final double kI_Lock = 0.0;
+        public static final double kP_Lock = 1.0;
+        public static final double kI_Lock = 0.05;
         public static final double kD_Lock = 0.000;
         public static final double iLimit_Lock = 0.36;
     }
     
     public final class AutoConstants {
         // Feed forward shit
-        public static final int kRamseteB = 0;
-        public static final int kRamseteZeta = 0;
-        public static final int kMaxSpeedMetersPerSecond = 0;
-        public static final int kMaxAccelerationMetersPerSecondSquared = 0;
+        public static final double kRamseteB = 2.5;
+        public static final double kRamseteZeta = 3.0;
+
+        // Positions
+        public static final double kMaxSpeedMetersPerSecond = 1.86;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 5.01;
     }
 
     public final class ArmConstants {
@@ -89,6 +90,7 @@ public final class Constants {
     public final class OIConstants {
         public static final int driverController = 0;
         public static final int operatorController = 1;
+        
         public static final int leftStick_X = 0;
         public static final int leftStick_Y = 1;
         public static final int trigger_L = 2;
