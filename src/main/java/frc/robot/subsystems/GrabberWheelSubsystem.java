@@ -23,7 +23,6 @@ public class GrabberWheelSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-
   public void rollIn(){
     m_grabberMotor.set(GrabberConstants.motorSpeed);
   }
