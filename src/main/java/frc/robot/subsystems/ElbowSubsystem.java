@@ -24,11 +24,11 @@ public class ElbowSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void run(double speed){
+  public void elbowRun(double speed){
     m_elbowMotor.set(speed);
   }
   
-  public void stop(){
+  public void elbowStop(){
     m_elbowMotor.set(0);
   }
 }

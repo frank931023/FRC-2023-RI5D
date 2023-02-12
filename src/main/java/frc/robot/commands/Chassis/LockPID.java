@@ -58,8 +58,9 @@ public class LockPID extends CommandBase {
     Joystick driverJoystick = new Joystick(0);
 
     if ( Math.abs(driverJoystick.getRawAxis(OIConstants.leftStick_Y)) > 0.1 
-    || Math.abs(driverJoystick.getRawAxis(OIConstants.rightStick_X)) > 0.1 ) 
+    || Math.abs(driverJoystick.getRawAxis(OIConstants.rightStick_X)) > 0.1 ){
       stop();
+    } 
 
     double distLeft = drive.getLeftRelativeDistance();
     double distRight = drive.getRightRelativeDistance();
@@ -70,8 +71,8 @@ public class LockPID extends CommandBase {
     System.out.println("dL" + distLeft);
     System.out.println("dR" + distRight);
 
-    double LeftOutput = PID( PIDConstants.kP_Lock, PIDConstants.kI_Lock, PIDConstants.kD_Lock, PIDConstants.iLimit_Lock, trueL, 0 );
-    double RightOutput = PID( PIDConstants.kP_Lock, PIDConstants.kI_Lock, PIDConstants.kD_Lock, PIDConstants.iLimit_Lock, trueR, 0 );
+    double LeftOutput = PID(PIDConstants.kP_Lock, PIDConstants.kI_Lock, PIDConstants.kD_Lock, PIDConstants.iLimit_Lock, trueL, 0);
+    double RightOutput = PID(PIDConstants.kP_Lock, PIDConstants.kI_Lock, PIDConstants.kD_Lock, PIDConstants.iLimit_Lock, trueR, 0);
 
     drive.setLeftSpeed( LeftOutput );
     drive.setRightSpeed( RightOutput );
@@ -96,7 +97,7 @@ public class LockPID extends CommandBase {
     return isEnd;
   }
 
-  public double PID ( double kP, double kI, double kD, double iLimit, double ctrPos, double target ) {
+  public double PID (double kP, double kI, double kD, double iLimit, double ctrPos, double target) {
     double output = 0;
     double error = target - ctrPos;
     double i = 0;

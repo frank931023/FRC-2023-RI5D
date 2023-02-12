@@ -17,6 +17,8 @@ import frc.robot.commands.Chassis.LockPID;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.GrabberPCMSubsystem;
+import frc.robot.subsystems.GrabberWheelSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -39,6 +41,8 @@ public class RobotContainer {
   private final DriveSubsystem m_drive = new DriveSubsystem();
   private final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
   private final ArmSubsystem m_arm = new ArmSubsystem();
+  private final GrabberPCMSubsystem m_grabPCM = new GrabberPCMSubsystem();
+  private final GrabberWheelSubsystem m_grabWheel = new GrabberWheelSubsystem();
 
   // Chassis Commands
   private final LockPID m_setPoint = new LockPID(m_drive);
@@ -54,7 +58,7 @@ public class RobotContainer {
 
     // Elevator
     m_elevator.setDefaultCommand(new RunCommand(() -> {
-      m_elevator.run(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
+      m_elevator.elevatorRun(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
       , m_elevator));
 
 

@@ -16,6 +16,8 @@ public class GrabberWheelSubsystem extends SubsystemBase {
   /** Creates a new GrabberWheelSubsystem. */
   public GrabberWheelSubsystem() {
     m_grabberMotor.setInverted(false);
+    m_grabberMotor.getEncoder().setPosition(0);
+    
   }
 
   @Override
@@ -23,15 +25,19 @@ public class GrabberWheelSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void rollIn(){
-    m_grabberMotor.set(GrabberConstants.motorSpeed);
-  }
-
-  public void rollOut(){
-    m_grabberMotor.set(-GrabberConstants.motorSpeed);
+  public void rollRun(double speed){
+    m_grabberMotor.set(speed);
   }
 
   public void rollStop(){
     m_grabberMotor.set(0);
+  }
+
+  public double getWheelPos(){
+   return m_grabberMotor.getEncoder().getPosition();
+  }
+
+  public double getWheelVel(){
+    return m_grabberMotor.getEncoder().getVelocity();
   }
 }

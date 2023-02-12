@@ -22,7 +22,7 @@ import frc.robot.subsystems.DriveSubsystem;
 
 public class PathFollowingRamsete extends CommandBase {
 
-  DriveSubsystem m_drive;
+  private final DriveSubsystem m_drive;
 
   String pathname;
   boolean isFirstpath;
