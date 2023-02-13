@@ -31,4 +31,16 @@ public class ArmSubsystem extends SubsystemBase {
   public void stop(){
     m_armMotor.set(0);
   }
+
+  public double getArmPos(){
+    return m_armMotor.getEncoder().getPosition();
+  }
+
+  public double getArmVel(){
+    return m_armMotor.getEncoder().getVelocity();
+  }
+
+  public void resetEncoders(){
+    m_armMotor.getEncoder().setPosition(0);
+  }
 }

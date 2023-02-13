@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenixpro.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -14,6 +15,7 @@ import frc.robot.Constants.ElbowConstants;
 public class ElbowSubsystem extends SubsystemBase {
 
   private final CANSparkMax m_elbowMotor = new CANSparkMax(ElbowConstants.motorID, MotorType.kBrushless);
+  // private final CANcoder m_elbowCancoder = new CANcoder(0);
   
   /** Creates a new LufySubsystem. */
   public ElbowSubsystem() {

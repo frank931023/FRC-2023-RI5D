@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import org.apache.commons.io.filefilter.FalseFileFilter;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -32,11 +34,33 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void elevatorRun(double speed){
-    m_motorElevatorLeft.set(speed);
+    if(this.atLimit() == false) m_motorElevatorLeft.set(speed);
+    else m_motorElevatorLeft.set(0);
   }
   
   public void elevatorstop(){
     m_motorElevatorLeft.set(0);
+  }
+
+  public double getLeftMotorPos(){
+    return m_motorElevatorLeft.getEncoder().getPosition();
+  }
+
+  public double getLeftMotorVel(){
+    return m_motorElevatorLeft.getEncoder().getVelocity();
+  }
+
+  public double getRightMotorPos(){
+    return m_motorElevatorRight.getEncoder().getPosition();
+  }
+
+  public double getRightMotorVel(){
+    return m_motorElevatorRight.getEncoder().getVelocity();
+  }
+
+  public void resetEncoders(){
+    m_motorElevatorLeft.getEncoder().setPosition(0);
+    m_motorElevatorRight.getEncoder().setPosition(0);
   }
 
   public boolean getLeftUpLimit(){
@@ -53,5 +77,12 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public boolean getRightDownLimit(){
     return rightDownLimitSwitch.get();
+  }
+
+  public boolean atLimit(){
+    if(this.getLeftUpLimit() == false && this.getLeftDownLimit() == false
+    && this.getRightUpLimit() == false && this.getRightDownLimit() == false){
+      return false;
+    } else return true;
   }
 }

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.GrabberConstants;
 
 public class GrabberWheelSubsystem extends SubsystemBase {
-  
+
   private final CANSparkMax m_grabberMotor = new CANSparkMax(GrabberConstants.motorID, MotorType.kBrushless);
 
   /** Creates a new GrabberWheelSubsystem. */
@@ -41,4 +41,8 @@ public class GrabberWheelSubsystem extends SubsystemBase {
   public double getWheelVel(){
     return m_grabberMotor.getEncoder().getVelocity();
   }
+
+  public void resetEncoders()[
+    m_grabberMotor.getEncoder().setPosition(0);
+  ]
 }
