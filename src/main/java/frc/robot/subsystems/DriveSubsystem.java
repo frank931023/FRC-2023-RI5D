@@ -38,8 +38,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_CANCoder m_rightEncoder = new WPI_CANCoder(DriveConstants.kRightEncoderPort);
 
   DifferentialDriveOdometry m_odometry = 
-    new DifferentialDriveOdometry(
-      m_gyro.getRotation2d(), getLeftRelativeDistance(), getRightRelativeDistance());
+    new DifferentialDriveOdometry(m_gyro.getRotation2d(), getLeftRelativeDistance(), getRightRelativeDistance());
 
     /** Creates a new ExampleSubsystem. */
   public DriveSubsystem() {

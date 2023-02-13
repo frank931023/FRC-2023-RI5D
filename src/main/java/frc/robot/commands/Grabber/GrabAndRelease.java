@@ -5,20 +5,36 @@
 package frc.robot.commands.Grabber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.GrabberPCMSubsystem;
 
-public class Release extends CommandBase {
-  /** Creates a new Release. */
-  public Release() {
+public class GrabAndRelease extends CommandBase {
+
+  private final GrabberPCMSubsystem grabPCM;
+  private boolean state;
+
+  /** Creates a new GrabAndRelease. */
+  public GrabAndRelease(GrabberPCMSubsystem grabPCM) {
+    this.grabPCM = grabPCM;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(grabPCM);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    state = false;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if(state == true){
+      grabPCM.handOpen();;
+    }else{
+      grabPCM.handClose();
+    }
+    state = !state;
+  }
 
   // Called once the command ends or is interrupted.
   @Override

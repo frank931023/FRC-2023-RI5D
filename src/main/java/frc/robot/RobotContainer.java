@@ -13,6 +13,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Chassis.PathFollowingRamsete;
+import frc.robot.commands.Grabber.GrabAndRelease;
 import frc.robot.commands.Chassis.LockPID;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -44,8 +45,10 @@ public class RobotContainer {
   private final GrabberPCMSubsystem m_grabPCM = new GrabberPCMSubsystem();
   private final GrabberWheelSubsystem m_grabWheel = new GrabberWheelSubsystem();
 
-  // Chassis Commands
+  // Commands
   private final LockPID m_setPoint = new LockPID(m_drive);
+  private final GrabAndRelease m_grabAndRelease = new GrabAndRelease(m_grabPCM);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -77,6 +80,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(driverJoystick, OIConstants.Btn_A).onTrue(m_setPoint);
     new JoystickButton(driverJoystick, OIConstants.Btn_B).onTrue(new RunCommand( () -> {m_drive.resetEncoders();}, m_drive));
+    new JoystickButton(operatorJoystick, OIConstants.Btn_A).onTrue(m_grabAndRelease);
+
 
   }
 

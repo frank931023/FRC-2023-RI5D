@@ -51,12 +51,6 @@ public final class Constants {
         public static final double kI_Lock = 0.05;
         public static final double kD_Lock = 0.000;
         public static final double iLimit_Lock = 0.36;
-
-        // Grabber
-        public static final double kP_grabberWheel = 0.0;
-        public static final double kI_grabberWheel = 0.0;
-        public static final double kD_grabberWheel = 0.0;
-        public static final double grabberWheelSetPoint = 10.0;
     }
     
     public final class AutoConstants {
@@ -90,6 +84,10 @@ public final class Constants {
         public static final int leftMotorID = 9;
         public static final int rightMotorID = 8;
         public static final double elevatorSpeedScaler = 0.5;
+        public static final int leftUpChannel = 0;
+        public static final int leftDownChannel = 0;
+        public static final int rightUpChannel = 0;
+        public static final int rightDownChannel = 0;
     }
 
     public final class OIConstants {

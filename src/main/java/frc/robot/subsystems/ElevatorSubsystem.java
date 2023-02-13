@@ -7,13 +7,18 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConstants;
 
 public class ElevatorSubsystem extends SubsystemBase {
 
-  CANSparkMax m_motorElevatorLeft = new CANSparkMax(ElevatorConstants.leftMotorID, MotorType.kBrushless);
-  CANSparkMax m_motorElevatorRight = new CANSparkMax(ElevatorConstants.rightMotorID, MotorType.kBrushless);
+  private final CANSparkMax m_motorElevatorLeft = new CANSparkMax(ElevatorConstants.leftMotorID, MotorType.kBrushless);
+  private final CANSparkMax m_motorElevatorRight = new CANSparkMax(ElevatorConstants.rightMotorID, MotorType.kBrushless);
+  private final DigitalInput leftUpLimitSwitch = new DigitalInput(ElevatorConstants.leftUpChannel);
+  private final DigitalInput leftDownLimitSwitch = new DigitalInput(ElevatorConstants.leftDownChannel);
+  private final DigitalInput rightUpLimitSwitch = new DigitalInput(ElevatorConstants.rightUpChannel);
+  private final DigitalInput rightDownLimitSwitch = new DigitalInput(ElevatorConstants.rightDownChannel);
 
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
@@ -32,5 +37,21 @@ public class ElevatorSubsystem extends SubsystemBase {
   
   public void elevatorstop(){
     m_motorElevatorLeft.set(0);
+  }
+
+  public boolean getLeftUpLimit(){
+    return leftUpLimitSwitch.get();
+  }
+
+  public boolean getLeftDownLimit(){
+    return leftDownLimitSwitch.get();
+  }
+
+  public boolean getRightUpLimit(){
+    return rightUpLimitSwitch.get();
+  }
+
+  public boolean getRightDownLimit(){
+    return rightDownLimitSwitch.get();
   }
 }
