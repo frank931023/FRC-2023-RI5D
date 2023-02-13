@@ -28,11 +28,8 @@ public class GrabAndRelease extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(state == true){
-      grabPCM.handOpen();;
-    }else{
-      grabPCM.handClose();
-    }
+    if(state == true) grabPCM.handOpen();
+    else grabPCM.handClose();
     state = !state;
   }
 

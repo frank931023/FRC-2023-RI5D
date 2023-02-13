@@ -42,7 +42,7 @@ public class GrabberWheelSubsystem extends SubsystemBase {
     return m_grabberMotor.getEncoder().getVelocity();
   }
 
-  public void resetEncoders()[
+  public void resetEncoders(){
     m_grabberMotor.getEncoder().setPosition(0);
-  ]
+  }
 }

@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import org.apache.commons.io.filefilter.FalseFileFilter;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
