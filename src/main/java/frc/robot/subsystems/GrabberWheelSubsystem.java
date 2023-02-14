@@ -18,7 +18,6 @@ public class GrabberWheelSubsystem extends SubsystemBase {
   public GrabberWheelSubsystem() {
     m_grabberMotor.setInverted(false);
     m_grabberMotor.getEncoder().setPosition(0);
-    
   }
 
   @Override

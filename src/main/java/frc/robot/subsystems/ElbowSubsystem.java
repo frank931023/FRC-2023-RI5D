@@ -8,18 +8,18 @@ import com.ctre.phoenixpro.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElbowConstants;
 
 public class ElbowSubsystem extends SubsystemBase {
 
   private final CANSparkMax m_elbowMotor = new CANSparkMax(ElbowConstants.motorID, MotorType.kBrushless);
-  // private final CANcoder m_elbowCancoder = new CANcoder(0);
+  // private final CANcoder m_elbowCancoder = new CANcoder(ElbowConstants.cancoderID);
   
   /** Creates a new LufySubsystem. */
   public ElbowSubsystem() {
     m_elbowMotor.setInverted(false);
+    m_elbowMotor.getEncoder().setPosition(0);
   }
 
   @Override
@@ -34,4 +34,6 @@ public class ElbowSubsystem extends SubsystemBase {
   public void elbowStop(){
     m_elbowMotor.set(0);
   }
+
+  
 }

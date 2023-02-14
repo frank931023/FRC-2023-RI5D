@@ -17,6 +17,7 @@ public class ArmSubsystem extends SubsystemBase {
   /** Creates a new LufySubsystem. */
   public ArmSubsystem() {
     m_armMotor.setInverted(false);
+    m_armMotor.getEncoder().setPosition(0);
   }
 
   @Override

@@ -71,6 +71,7 @@ public final class Constants {
 
     public final class ElbowConstants {
         public static final int motorID = 0;
+        public static final int cancoderID = 0;
     }
 
     public final class GrabberConstants {
