@@ -9,15 +9,19 @@ import com.pathplanner.lib.server.PathPlannerServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ElbowConstants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Chassis.PathFollowingRamsete;
 import frc.robot.commands.Grabber.GrabAndRelease;
 import frc.robot.commands.Chassis.LockPID;
+import frc.robot.commands.Grabber.WheelsTurnAndStop;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ElbowSubsystem;
 import frc.robot.subsystems.GrabberPCMSubsystem;
 import frc.robot.subsystems.GrabberWheelSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,12 +46,14 @@ public class RobotContainer {
   private final DriveSubsystem m_drive = new DriveSubsystem();
   private final ElevatorSubsystem m_elevator = new ElevatorSubsystem();
   private final ArmSubsystem m_arm = new ArmSubsystem();
+  private final ElbowSubsystem m_elbow = new ElbowSubsystem();
   private final GrabberPCMSubsystem m_grabPCM = new GrabberPCMSubsystem();
   private final GrabberWheelSubsystem m_grabWheel = new GrabberWheelSubsystem();
 
   // Commands
   private final LockPID m_setPoint = new LockPID(m_drive);
   private final GrabAndRelease m_grabAndRelease = new GrabAndRelease(m_grabPCM);
+  private final WheelsTurnAndStop m_wheelsTurnAndStop = new WheelsTurnAndStop(m_grabWheel);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -55,15 +61,28 @@ public class RobotContainer {
     // Drive
     m_drive.setDefaultCommand(new RunCommand(() -> {
       m_drive.arcadeDrive(
-        driverJoystick.getRawAxis(OIConstants.leftStick_Y) * DriveConstants.chassisArcadeSpdScaler, 
+        -driverJoystick.getRawAxis(OIConstants.leftStick_Y) * DriveConstants.chassisArcadeSpdScaler, 
         driverJoystick.getRawAxis(OIConstants.rightStick_X) * DriveConstants.chassisArcadeRotScaler);
     }, m_drive));
 
     // Elevator
     m_elevator.setDefaultCommand(new RunCommand(() -> {
-      m_elevator.elevatorRun(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler); }
+      m_elevator.elevatorRun(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler);}
       , m_elevator));
 
+    // Arm
+    m_arm.setDefaultCommand(new RunCommand(() -> {
+      if(operatorJoystick.getRawAxis(OIConstants.trigger_L)>0.05){
+        m_arm.run(operatorJoystick.getRawAxis(OIConstants.trigger_L) * ArmConstants.armSpeedScaler);
+      }else{
+        m_arm.run(-operatorJoystick.getRawAxis(OIConstants.trigger_R) * ArmConstants.armSpeedScaler);
+      }
+    }, m_arm));
+
+    // Elbow
+    m_elbow.setDefaultCommand(new RunCommand(() -> {
+      m_elbow.elbowRun(operatorJoystick.getRawAxis(OIConstants.leftStick_Y) * ElbowConstants.elbowSpeedScaler);
+    }, m_elbow));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -80,8 +99,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(driverJoystick, OIConstants.Btn_A).onTrue(m_setPoint);
     new JoystickButton(driverJoystick, OIConstants.Btn_B).onTrue(new RunCommand( () -> {m_drive.resetEncoders();}, m_drive));
-    new JoystickButton(operatorJoystick, OIConstants.Btn_A).onTrue(m_grabAndRelease);
-
+    new JoystickButton(operatorJoystick, OIConstants.Btn_LB).onTrue(m_grabAndRelease);
+    new JoystickButton(operatorJoystick, OIConstants.Btn_RB).onTrue(m_wheelsTurnAndStop);
 
   }
 
@@ -94,5 +113,9 @@ public class RobotContainer {
     return new SequentialCommandGroup(
       new PathFollowingRamsete(m_drive, "New Path", true), 
       m_setPoint);
+  }
+
+  public void testMotor(){
+    this.m_drive.testMotor();
   }
 }
