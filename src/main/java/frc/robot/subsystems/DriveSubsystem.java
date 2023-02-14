@@ -71,6 +71,10 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public void testMotor(){
+    this.m_motorRearRight.set(0.1);
+  }
+
   public double getLeftRelativeDistance() {
     return m_leftEncoder.getPosition() * DriveConstants.kDistancePerPulse;
   }
