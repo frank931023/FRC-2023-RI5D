@@ -67,8 +67,12 @@ public class RobotContainer {
 
     // Elevator
     m_elevator.setDefaultCommand(new RunCommand(() -> {
-      m_elevator.elevatorRun(operatorJoystick.getRawAxis(OIConstants.rightStick_Y) * ElevatorConstants.elevatorSpeedScaler);}
-      , m_elevator));
+      if (operatorJoystick.getRawAxis(OIConstants.rightStick_Y) > 0.05) {
+        m_elevator.elevatorRunUp(ElevatorConstants.elevatorUpSpeedScaler);
+      } else if (operatorJoystick.getRawAxis(OIConstants.rightStick_Y) < 0.05) {
+        m_elevator.elevatorRunDown(ElevatorConstants.elevatorDownSpeedScaler);
+      } 
+    } , m_elevator));
 
     // Arm
     m_arm.setDefaultCommand(new RunCommand(() -> {
@@ -81,7 +85,7 @@ public class RobotContainer {
 
     // Elbow
     m_elbow.setDefaultCommand(new RunCommand(() -> {
-      m_elbow.elbowRun(operatorJoystick.getRawAxis(OIConstants.leftStick_Y) * ElbowConstants.elbowSpeedScaler);
+      m_elbow.elbowRun(operatorJoystick.getRawAxis(-OIConstants.leftStick_Y) * ElbowConstants.elbowSpeedScaler);
     }, m_elbow));
 
     // Configure the button bindings

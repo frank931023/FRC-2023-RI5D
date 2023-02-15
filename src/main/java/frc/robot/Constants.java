@@ -84,7 +84,8 @@ public final class Constants {
     public final class ElevatorConstants {
         public static final int leftMotorID = 9;
         public static final int rightMotorID = 8;
-        public static final double elevatorSpeedScaler = 0.5;
+        public static final double elevatorUpSpeedScaler = 0.4;
+        public static final double elevatorDownSpeedScaler = 0.2;
         public static final int leftUpChannel = 0;
         public static final int leftDownChannel = 1;
         public static final int rightUpChannel = 2;

@@ -24,7 +24,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   public ElevatorSubsystem() {
     m_motorElevatorLeft.setInverted(false);
     m_motorElevatorRight.setInverted(true);
-    m_motorElevatorRight.follow(m_motorElevatorLeft);
+    m_motorElevatorRight.follow(m_motorElevatorLeft, true);
     m_motorElevatorLeft.getEncoder().setPosition(0);
     m_motorElevatorRight.getEncoder().setPosition(0);
   }
@@ -34,8 +34,13 @@ public class ElevatorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void elevatorRun(double speed){
-    if(this.atLimit() == false) m_motorElevatorLeft.set(speed);
+  public void elevatorRunUp(double speed){
+    if(this.atUpLimit() == false) m_motorElevatorLeft.set(speed);
+    else m_motorElevatorLeft.set(0);
+  }
+
+  public void elevatorRunDown(double speed){
+    if(this.atDownLimit() == false) m_motorElevatorLeft.set(speed);
     else m_motorElevatorLeft.set(0);
   }
   
@@ -86,4 +91,14 @@ public class ElevatorSubsystem extends SubsystemBase {
       return false;
     } else return true;
   }
+
+  public boolean atUpLimit(){
+   if(this.getLeftUpLimit() == false && this.getRightUpLimit() == false) return false;
+   else return true;
+  }
+
+  public boolean atDownLimit(){
+    if(this.getLeftDownLimit() == false && this.getRightDownLimit() == false) return false;
+    else return true;
+   }
 }
