@@ -10,7 +10,7 @@ import frc.robot.subsystems.GrabberPCMSubsystem;
 public class GrabAndRelease extends CommandBase {
 
   private final GrabberPCMSubsystem grabPCM;
-  private boolean state;
+  private boolean state = false;
 
   /** Creates a new GrabAndRelease. */
   public GrabAndRelease(GrabberPCMSubsystem grabPCM) {
@@ -22,7 +22,6 @@ public class GrabAndRelease extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    state = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -30,12 +29,13 @@ public class GrabAndRelease extends CommandBase {
   public void execute() {
     if(state == true) grabPCM.handOpen();
     else grabPCM.handClose();
-    state = !state;
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    state = !state;
+  }
 
   // Returns true when the command should end.
   @Override

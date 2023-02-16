@@ -24,7 +24,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   public ElevatorSubsystem() {
     m_motorElevatorLeft.setInverted(false);
     m_motorElevatorRight.setInverted(true);
-    m_motorElevatorRight.follow(m_motorElevatorLeft, true);
+    // m_motorElevatorRight.follow(m_motorElevatorLeft, true);
+    m_motorElevatorLeft.follow(m_motorElevatorRight, true);
     m_motorElevatorLeft.getEncoder().setPosition(0);
     m_motorElevatorRight.getEncoder().setPosition(0);
   }

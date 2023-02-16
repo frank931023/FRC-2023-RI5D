@@ -65,18 +65,19 @@ public class RobotContainer {
         driverJoystick.getRawAxis(OIConstants.rightStick_X) * DriveConstants.chassisArcadeRotScaler);
     }, m_drive));
 
+
     // Elevator
     m_elevator.setDefaultCommand(new RunCommand(() -> {
-      if (operatorJoystick.getRawAxis(OIConstants.rightStick_Y) > 0.05) {
+      if (operatorJoystick.getRawAxis(OIConstants.rightStick_Y) < -0.3) {
         m_elevator.elevatorRunUp(ElevatorConstants.elevatorUpSpeedScaler);
-      } else if (operatorJoystick.getRawAxis(OIConstants.rightStick_Y) < 0.05) {
+      } else if (operatorJoystick.getRawAxis(OIConstants.rightStick_Y) > 0.3) {
         m_elevator.elevatorRunDown(ElevatorConstants.elevatorDownSpeedScaler);
       } 
     } , m_elevator));
 
     // Arm
     m_arm.setDefaultCommand(new RunCommand(() -> {
-      if(operatorJoystick.getRawAxis(OIConstants.trigger_L)>0.05){
+      if(operatorJoystick.getRawAxis(OIConstants.trigger_L) > 0.05){
         m_arm.run(operatorJoystick.getRawAxis(OIConstants.trigger_L) * ArmConstants.armSpeedScaler);
       }else{
         m_arm.run(-operatorJoystick.getRawAxis(OIConstants.trigger_R) * ArmConstants.armSpeedScaler);
@@ -85,13 +86,11 @@ public class RobotContainer {
 
     // Elbow
     m_elbow.setDefaultCommand(new RunCommand(() -> {
-      m_elbow.elbowRun(operatorJoystick.getRawAxis(-OIConstants.leftStick_Y) * ElbowConstants.elbowSpeedScaler);
+      m_elbow.elbowRun(-operatorJoystick.getRawAxis(OIConstants.leftStick_Y) * ElbowConstants.elbowSpeedScaler);
     }, m_elbow));
 
     // Configure the button bindings
     configureButtonBindings();
-
-    PathPlannerServer.startServer(7130);
   }
 
   /**
@@ -101,11 +100,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(driverJoystick, OIConstants.Btn_A).onTrue(m_setPoint);
-    new JoystickButton(driverJoystick, OIConstants.Btn_B).onTrue(new RunCommand( () -> {m_drive.resetEncoders();}, m_drive));
+    // new JoystickButton(driverJoystick, OIConstants.Btn_A).onTrue(m_setPoint);
+    // new JoystickButton(driverJoystick, OIConstants.Btn_B).onTrue(new RunCommand( () -> {m_drive.resetEncoders();}, m_drive));
     new JoystickButton(operatorJoystick, OIConstants.Btn_LB).onTrue(m_grabAndRelease);
     new JoystickButton(operatorJoystick, OIConstants.Btn_RB).onTrue(m_wheelsTurnAndStop);
-
   }
 
   /**

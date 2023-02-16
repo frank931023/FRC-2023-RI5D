@@ -17,17 +17,16 @@ public class GrabberPCMSubsystem extends SubsystemBase {
 
   /** Creates a new GrabberPCMSubsystem. */
   public GrabberPCMSubsystem() {
+    enablecompressor();
   }
 
   @Override
-  public void periodic()
-  {
+  public void periodic() {
     // This method will be called once per scheduler run
   }
 
   public void enablecompressor(){
     comp.enableDigital();
-    DoublePCM.isFwdSolenoidDisabled();
   }
 
   public void handOpen(){

@@ -39,8 +39,8 @@ public final class Constants {
         // Chassis Related
         public static final double kTrackWidthmeters = 0.595;
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthmeters);
-        public static final double chassisArcadeSpdScaler = 0.8;
-        public static final double chassisArcadeRotScaler = 0.5;
+        public static final double chassisArcadeSpdScaler = 1;
+        public static final double chassisArcadeRotScaler = 1;
         public static final double chassisTankScaler = 0.5;
     }
     
@@ -63,7 +63,7 @@ public final class Constants {
     }
 
     public final class ArmConstants {
-        public static final double armSpeedScaler = 0.5;
+        public static final double armSpeedScaler = 0.3;
         public static final int motorID = 14;
     }
     
@@ -71,7 +71,7 @@ public final class Constants {
     public final class ElbowConstants {
         public static final int motorID = 12;
         public static final int cancoderID = 0;
-        public static final double elbowSpeedScaler = 0.08;
+        public static final double elbowSpeedScaler = 0.3;
     }
 
     public final class GrabberConstants {
@@ -84,8 +84,8 @@ public final class Constants {
     public final class ElevatorConstants {
         public static final int leftMotorID = 9;
         public static final int rightMotorID = 8;
-        public static final double elevatorUpSpeedScaler = 0.4;
-        public static final double elevatorDownSpeedScaler = 0.2;
+        public static final double elevatorUpSpeedScaler = 0.5;
+        public static final double elevatorDownSpeedScaler = 0.3;
         public static final int leftUpChannel = 0;
         public static final int leftDownChannel = 1;
         public static final int rightUpChannel = 2;
